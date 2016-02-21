@@ -71,7 +71,7 @@ public class UserApi extends BaseApi{
                 "Cache-Control:max-age=0,private,must-revalidate",
                 "Authorization:Bearer 030410453e69f1981606ddfa1be4caeb892a1ddd35457639d51a5e2d26110968"
         })
-        @GET("shots/:{id}")
+        @GET("shots/{id}")
         Observable<Author> getAuthorInfo(@Path("id") String id);
     }
     private static  AuthorImpl  author=getRetrofit().create(AuthorImpl.class);
