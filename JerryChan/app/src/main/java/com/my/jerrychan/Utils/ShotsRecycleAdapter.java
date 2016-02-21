@@ -23,6 +23,7 @@ public class ShotsRecycleAdapter extends RecyclerView.Adapter<ShotsRecycleAdapte
 
     private List<Shots > list;
     private Context context;
+    private RecycleItemClickListsener listsener;
     public ShotsRecycleAdapter(Context context,List<Shots> list){
         this.list=list;
         this.context=context;
@@ -46,7 +47,7 @@ public class ShotsRecycleAdapter extends RecyclerView.Adapter<ShotsRecycleAdapte
         return list.size();
     }
 
-     class ShotsHolder extends RecyclerView.ViewHolder{
+     class ShotsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView iv_img,iv_author_avatar;
         TextView tv_shotname,tv_author;
 
@@ -56,6 +57,23 @@ public class ShotsRecycleAdapter extends RecyclerView.Adapter<ShotsRecycleAdapte
             iv_author_avatar= (ImageView) itemView.findViewById(R.id.img_author_avatar);
             tv_shotname= (TextView) itemView.findViewById(R.id.tv_imgname);
             tv_author= (TextView) itemView.findViewById(R.id.tv_author);
+            itemView.setOnClickListener(this);
         }
+
+         @Override
+         public void onClick(View v) {
+             if (listsener!=null){
+                 listsener.onClick(v,getAdapterPosition());
+             }
+         }
+     }
+
+    public void setOnRecylceItemClick(RecycleItemClickListsener listsener){
+                this.listsener=listsener;
+    }
+
+
+    public interface RecycleItemClickListsener{
+        void  onClick(View view,int position);
     }
 }

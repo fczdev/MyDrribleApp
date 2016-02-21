@@ -1,5 +1,6 @@
 package com.my.jerrychan.HttpManager;
 
+import com.my.jerrychan.data.Author;
 import com.my.jerrychan.data.Shots;
 import com.my.jerrychan.data.User;
 
@@ -18,6 +19,7 @@ import rx.Observable;
  * e-mail:linchen0922@163.com
  */
 public class UserApi extends BaseApi{
+    //自己的用户信息获取
     private interface UserImpl {
         @Headers({
                 "Content-Type:application/json;charset=utf-8" ,
@@ -42,7 +44,7 @@ public class UserApi extends BaseApi{
 
 
 
-
+    //shots列表获取
     private interface ShotsImpl {
         @Headers({
                 "Content-Type:application/json;charset=utf-8" ,
@@ -59,6 +61,22 @@ public class UserApi extends BaseApi{
 
     public static  Observable<List<Shots>> getShots(String timeframe){
         return shots.getShots(timeframe);
+    }
+
+    //shots列表中的某一位的相关信息获取
+    private interface AuthorImpl{
+        @Headers({
+                "Content-Type:application/json;charset=utf-8" ,
+                "Server:nginx",
+                "Cache-Control:max-age=0,private,must-revalidate",
+                "Authorization:Bearer 030410453e69f1981606ddfa1be4caeb892a1ddd35457639d51a5e2d26110968"
+        })
+        @GET("shots/:{id}")
+        Observable<Author> getAuthorInfo(@Path("id") String id);
+    }
+    private static  AuthorImpl  author=getRetrofit().create(AuthorImpl.class);
+    public static  Observable<Author> getAuthorInfo(String id){
+        return author.getAuthorInfo(id);
     }
 
 

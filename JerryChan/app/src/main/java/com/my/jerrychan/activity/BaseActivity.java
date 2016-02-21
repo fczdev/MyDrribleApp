@@ -17,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    Retrofit retrofit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

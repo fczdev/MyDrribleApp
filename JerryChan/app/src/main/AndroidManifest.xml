@@ -10,8 +10,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/ImageTranslucentTheme">
-        <activity android:name=".activity.SplashActivity"
-            >
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/ImageTranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,9 +22,11 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            >
-
-        </activity>
+            android:theme="@style/ImageTranslucentTheme"></activity>
+        <activity
+            android:name=".AuthorShotsActivity"
+            android:label="@string/title_activity_author_shots"
+            android:theme="@style/ImageTranslucentTheme"></activity>
     </application>
 
 </manifest>

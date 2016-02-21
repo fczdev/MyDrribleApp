@@ -11,6 +11,7 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -21,5 +22,9 @@
 
         <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
     </style>
+
+    <style name="ImageTranslucentTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ImageTranslucentTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

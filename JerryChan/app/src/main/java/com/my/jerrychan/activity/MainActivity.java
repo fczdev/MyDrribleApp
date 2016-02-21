@@ -1,5 +1,6 @@
 package com.my.jerrychan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.my.jerrychan.AuthorShotsActivity;
 import com.my.jerrychan.HttpManager.UserApi;
 import com.my.jerrychan.R;
 import com.my.jerrychan.Utils.ShotsRecycleAdapter;
@@ -33,7 +36,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private DrawerLayout drawer;
@@ -51,7 +54,9 @@ public class MainActivity extends BaseActivity
         super.onChildCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Shots");
         setSupportActionBar(toolbar);
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -78,6 +83,7 @@ public class MainActivity extends BaseActivity
 
         recyclerView= (RecyclerView) findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+
 
 
         setDrawerData();
@@ -142,11 +148,26 @@ public class MainActivity extends BaseActivity
 
                     @Override
                     public void onNext(List<Shots> shotses) {
-                        MainActivity.this.shotses=shotses;
-                        shotsRecycleAdapter=new ShotsRecycleAdapter(MainActivity.this,MainActivity.this.shotses);
-                        recyclerView.setAdapter(shotsRecycleAdapter);
+                        initViewData(shotses);
                     }
                 });
+    }
+
+    private void initViewData(final List<Shots> shotses){
+        MainActivity.this.shotses=shotses;
+        shotsRecycleAdapter=new ShotsRecycleAdapter(MainActivity.this,MainActivity.this.shotses);
+        shotsRecycleAdapter.setOnRecylceItemClick(new ShotsRecycleAdapter.RecycleItemClickListsener() {
+            @Override
+            public void onClick(View view,int position) {
+                Intent intent=new Intent(MainActivity.this, AuthorShotsActivity.class);
+                intent.putExtra("shotsId",shotses.get(position).getId());
+                startActivity(intent);
+
+            }
+        });
+
+        recyclerView.setAdapter(shotsRecycleAdapter);
+
     }
 
 
@@ -201,8 +222,13 @@ public class MainActivity extends BaseActivity
 
         }
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
