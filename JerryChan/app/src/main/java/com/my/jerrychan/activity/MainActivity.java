@@ -16,9 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.my.jerrychan.AuthorShotsActivity;
 import com.my.jerrychan.HttpManager.UserApi;
 import com.my.jerrychan.R;
 import com.my.jerrychan.Utils.ShotsRecycleAdapter;
@@ -58,7 +56,7 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -161,6 +159,7 @@ public class MainActivity extends BaseActivity
             public void onClick(View view,int position) {
                 Intent intent=new Intent(MainActivity.this, AuthorShotsActivity.class);
                 intent.putExtra("shotsId",shotses.get(position).getId());
+                intent.putExtra("authorTitle",shotses.get(position).getTitle());
                 startActivity(intent);
 
             }

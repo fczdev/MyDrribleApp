@@ -12,6 +12,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--//过渡动画-->
         <item name="android:windowEnterTransition">@transition/activity_explode</item>
     </style>
 </resources>

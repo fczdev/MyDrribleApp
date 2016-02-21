@@ -9,7 +9,9 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
 
-
+    </style>
+    <style name="AuthorShotsActTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimaryDark">@android:color/transparent</item>
     </style>
 
 </resources>
