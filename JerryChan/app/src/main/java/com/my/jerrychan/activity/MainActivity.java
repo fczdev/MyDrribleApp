@@ -17,9 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.my.jerrychan.HttpManager.UserApi;
+import com.my.jerrychan.httpManager.UserApi;
 import com.my.jerrychan.R;
-import com.my.jerrychan.Utils.ShotsRecycleAdapter;
+import com.my.jerrychan.utils.ShotsRecycleAdapter;
 import com.my.jerrychan.data.Shots;
 import com.my.jerrychan.data.User;
 import com.my.jerrychan.db.UserDao;
@@ -50,7 +50,9 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onChildCreate(@Nullable Bundle savedInstanceState) {
         super.onChildCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Shots");
         setSupportActionBar(toolbar);
@@ -86,6 +88,12 @@ public class MainActivity extends BaseActivity
 
         setDrawerData();
         setMainData();
+    }
+
+    @Override
+    protected void onEndChildCreate(@Nullable Bundle savedInstanceState) {
+        super.onEndChildCreate(savedInstanceState);
+        loadDialog.showDialog();
     }
 
     //获取抽屉个人信息数据
@@ -130,7 +138,7 @@ public class MainActivity extends BaseActivity
     }
 
     private  void setMainData(){
-        UserApi.getShots("month")
+        UserApi.getShots("year")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Shots>>() {
@@ -166,6 +174,7 @@ public class MainActivity extends BaseActivity
         });
 
         recyclerView.setAdapter(shotsRecycleAdapter);
+        loadDialog.dismissDialog();
 
     }
 

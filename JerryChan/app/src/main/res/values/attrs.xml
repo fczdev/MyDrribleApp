@@ -5,4 +5,8 @@
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="SpinnerLoading">
+        <attr name="circle_color" format="color"/>
+        <attr name="circle_color_move" format="color"/>
+    </declare-styleable>
 </resources>

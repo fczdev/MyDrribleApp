@@ -1,4 +1,4 @@
-package com.my.jerrychan.HttpManager;
+package com.my.jerrychan.httpManager;
 
 import com.my.jerrychan.data.Author;
 import com.my.jerrychan.data.Comment;
@@ -7,7 +7,6 @@ import com.my.jerrychan.data.User;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
@@ -34,7 +33,7 @@ public class UserApi extends BaseApi{
 
     }
 
-    private static com.my.jerrychan.HttpManager.UserApi.UserImpl userImpl=getRetrofit().create(UserImpl.class);
+    private static com.my.jerrychan.httpManager.UserApi.UserImpl userImpl=getRetrofit().create(UserImpl.class);
 
     public static Observable<User> getUser(String user){
         return userImpl.getUsers(user);

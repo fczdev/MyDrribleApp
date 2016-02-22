@@ -3,7 +3,7 @@ package com.my.jerrychan.db;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
-import com.my.jerrychan.Utils.DateUtils;
+import com.my.jerrychan.utils.DateUtils;
 import com.my.jerrychan.data.User;
 
 import java.sql.SQLException;

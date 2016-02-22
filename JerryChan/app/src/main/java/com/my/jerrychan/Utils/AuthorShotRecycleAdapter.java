@@ -1,4 +1,4 @@
-package com.my.jerrychan.Utils;
+package com.my.jerrychan.utils;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.jerrychan.R;
@@ -95,7 +94,7 @@ public class AuthorShotRecycleAdapter extends RecyclerView.Adapter<AuthorShotRec
            holder.tv_authorname.setText(author.getUser().getUsername());
             holder.tv_author_date.setText(DateUtils.changeToNormal(author.getUpdatedAt()));
             Picasso.with(context).load(author.getUser().getAvatarUrl()).into(holder.iv_author_img);
-            holder.tv_author_description.setText(Html.fromHtml(author.getDescription()));
+            holder.tv_author_description.setText(Html.fromHtml(author.getDescription())+"");
         }else {
             int realPostion=getRealPosition(holder);
             holder.tv_comment_author_update.setText(DateUtils.changeToNormal(mDatas.get(realPostion).getUpdatedAt()));

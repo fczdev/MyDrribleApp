@@ -1,35 +1,20 @@
 package com.my.jerrychan.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.my.jerrychan.HttpManager.UserApi;
-import com.my.jerrychan.Utils.DateUtils;
-import com.my.jerrychan.constant.ApiConstant;
+import com.my.jerrychan.httpManager.UserApi;
+import com.my.jerrychan.utils.DateUtils;
 import com.my.jerrychan.R;
 import com.my.jerrychan.data.User;
 import com.my.jerrychan.db.UserDao;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Url;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class SplashActivity extends BaseActivity {
@@ -58,29 +43,6 @@ public class SplashActivity extends BaseActivity {
 
 
     private void getData() {
-//        UserImpl service = retrofit.create(UserImpl.class);
-//        Call<User> result = service.getUsers("user");
-//        result.enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                if (response.isSuccess()) {
-//                    User user1 = response.body();
-//                    Log.e(TAG+"success", user1.toString());
-//                    setInDb(user1);
-//                } else {
-//                    Log.e(TAG+"failure", response.message() + "--->headers" + response.headers());
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//
-//                Log.e(TAG+"error:", t.getMessage());
-//
-//            }
-//        });
         UserApi.getUser("user")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.my.jerrychan.widgets.CircleImageView
         android:layout_margin="10dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        app:border_width="2dp"
+        app:border_color="@color/colorPrimaryLight"
         android:id="@+id/iv_comment_person_img"/>
 
     <TextView

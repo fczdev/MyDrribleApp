@@ -1,4 +1,4 @@
-package com.my.jerrychan.Utils;
+package com.my.jerrychan.utils;
 
 import android.util.Log;
 

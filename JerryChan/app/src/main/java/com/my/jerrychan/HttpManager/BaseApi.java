@@ -1,7 +1,4 @@
-package com.my.jerrychan.HttpManager;
-
-import android.app.Application;
-import android.content.Context;
+package com.my.jerrychan.httpManager;
 
 import com.my.jerrychan.constant.ApiConstant;
 

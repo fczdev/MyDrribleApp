@@ -7,12 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.my.jerrychan.HttpManager.UserApi;
+import com.my.jerrychan.httpManager.UserApi;
 import com.my.jerrychan.R;
-import com.my.jerrychan.Utils.AuthorShotRecycleAdapter;
+import com.my.jerrychan.utils.AuthorShotRecycleAdapter;
 import com.my.jerrychan.data.Author;
 import com.my.jerrychan.data.Comment;
 import com.squareup.picasso.Picasso;
@@ -24,7 +25,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AuthorShotsActivity extends BaseActivity implements View.OnClickListener{
+public class AuthorShotsActivity extends BaseActivity {
     private final static String TAG="AuthorShotsActivity";
     private Toolbar toolbar;
     private long userId=0l;
@@ -38,6 +39,7 @@ public class AuthorShotsActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onChildCreate(@Nullable Bundle savedInstanceState) {
         super.onChildCreate(savedInstanceState);
+
         setContentView(R.layout.activity_author_shots);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -48,7 +50,7 @@ public class AuthorShotsActivity extends BaseActivity implements View.OnClickLis
             toolbar.setTitle(authorTitleStr);
         }
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
-        toolbar.setNavigationOnClickListener(this);
+
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,6 +61,12 @@ public class AuthorShotsActivity extends BaseActivity implements View.OnClickLis
         title_img= (ImageView) findViewById(R.id.toolbar_image);
         getData();
 
+    }
+
+    @Override
+    protected void onEndChildCreate(@Nullable Bundle savedInstanceState) {
+        super.onEndChildCreate(savedInstanceState);
+        loadDialog.showDialog();
     }
 
     private void getData() {
@@ -118,17 +126,24 @@ public class AuthorShotsActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onNext(List<Comment> comments) {
                         adapter.addDatas(comments);
+                        loadDialog.dismissDialog();
                     }
                 });
 
     }
 
 
+
+
+    //注意这里使用这个的原因是当给Toolbar设置 toolbar.setNavigationOnClickListener();
+    //的时候，发现api并不能正常工作，所以以此方法代之
     @Override
-    public void onClick(View v) {
-        int id=v.getId();
-        if (R.id.toolbar==id){
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
             AuthorShotsActivity.this.finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }
