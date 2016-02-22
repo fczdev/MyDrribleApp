@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -34,8 +35,9 @@ public class AuthorShotsActivity extends BaseActivity {
     private long userId=0l;
     private String authorTitleStr="";
     private RecyclerView recyclerView;
-    private List<String> list;
+    private List<Comment> list;
     private ImageView title_img;
+    private AuthorShotRecycleAdapter adapter;
 
 
     @Override
@@ -54,10 +56,8 @@ public class AuthorShotsActivity extends BaseActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list=new ArrayList<>();
-        for (int i = 'A'; i < 'z'; i++) {
-            list.add("" + (char) i);
-        }
-        recyclerView.setAdapter(new AuthorShotRecycleAdapter(this,list));
+
+
 
         title_img= (ImageView) findViewById(R.id.toolbar_image);
         getData();
@@ -83,12 +83,22 @@ public class AuthorShotsActivity extends BaseActivity {
 
                     @Override
                     public void onNext(Author author) {
+                        recyclerView.setAdapter(new AuthorShotRecycleAdapter(AuthorShotsActivity.this,list));
                         Picasso.with(AuthorShotsActivity.this)
                                 .load(author.getImages().getNormal())
                                 .into(title_img);
+                        initRecycleHeader(author);
                         getComments(author.getId()+"");
                     }
                 });
+    }
+
+    private void initRecycleHeader(Author author) {
+        adapter=new AuthorShotRecycleAdapter(this,list);
+        View view= LayoutInflater.from(this).inflate(R.layout.recycle_author_info_header,recyclerView,false);
+        recyclerView.setAdapter(adapter);
+        adapter.setHeaderView(view,author);
+
     }
 
     private void getComments(String id){
@@ -110,7 +120,7 @@ public class AuthorShotsActivity extends BaseActivity {
 
                     @Override
                     public void onNext(List<Comment> comments) {
-                        Log.e(TAG,comments.toString());
+                        adapter.addDatas(comments);
                     }
                 });
 
