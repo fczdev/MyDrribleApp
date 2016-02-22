@@ -4,4 +4,4 @@ a app for Drrrible
 
 做好的页面：
 
-![gif](https://github.com/JerryChan123/MyDrribleApp/tree/master/JerryChan/app/src/main/java/screenshot/yo.gif)
+![gif](https://github.com/JerryChan123/raw/blob/master/yo.gif)
