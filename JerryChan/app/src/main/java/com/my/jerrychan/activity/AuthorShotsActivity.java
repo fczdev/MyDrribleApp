@@ -2,9 +2,6 @@ package com.my.jerrychan.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +13,6 @@ import android.widget.ImageView;
 import com.my.jerrychan.HttpManager.UserApi;
 import com.my.jerrychan.R;
 import com.my.jerrychan.Utils.AuthorShotRecycleAdapter;
-import com.my.jerrychan.activity.BaseActivity;
 import com.my.jerrychan.data.Author;
 import com.my.jerrychan.data.Comment;
 import com.squareup.picasso.Picasso;
@@ -24,12 +20,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AuthorShotsActivity extends BaseActivity {
+public class AuthorShotsActivity extends BaseActivity implements View.OnClickListener{
     private final static String TAG="AuthorShotsActivity";
     private Toolbar toolbar;
     private long userId=0l;
@@ -52,6 +47,8 @@ public class AuthorShotsActivity extends BaseActivity {
         {
             toolbar.setTitle(authorTitleStr);
         }
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
+        toolbar.setNavigationOnClickListener(this);
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -127,5 +124,11 @@ public class AuthorShotsActivity extends BaseActivity {
     }
 
 
-
+    @Override
+    public void onClick(View v) {
+        int id=v.getId();
+        if (R.id.toolbar==id){
+            AuthorShotsActivity.this.finish();
+        }
+    }
 }

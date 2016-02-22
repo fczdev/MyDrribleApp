@@ -3,6 +3,7 @@ package com.my.jerrychan.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 
 import com.my.jerrychan.HttpManager.BaseApi;
 import com.my.jerrychan.constant.ApiConstant;
@@ -26,11 +27,23 @@ public class BaseActivity extends AppCompatActivity {
 
 
     }
-    protected  void onChildCreate(@Nullable Bundle savedInstanceState){
+
+    protected void onChildCreate(@Nullable Bundle savedInstanceState) {
 
     }
 
-//    protected void setApiConnection(){
+    //    protected void setApiConnection(){
 //        retrofit= BaseApi.
 //    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+           return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }
