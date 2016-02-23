@@ -1,21 +1,27 @@
 package com.my.jerrychan.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.my.jerrychan.httpManager.UserApi;
 import com.my.jerrychan.R;
 import com.my.jerrychan.utils.AuthorShotRecycleAdapter;
 import com.my.jerrychan.data.Author;
 import com.my.jerrychan.data.Comment;
+import com.my.jerrychan.widgets.TipsDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,7 +31,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AuthorShotsActivity extends BaseActivity {
+
+public class AuthorShotsActivity extends BaseActivity implements View.OnClickListener {
     private final static String TAG="AuthorShotsActivity";
     private Toolbar toolbar;
     private long userId=0l;
@@ -34,7 +41,8 @@ public class AuthorShotsActivity extends BaseActivity {
     private List<Comment> list;
     private ImageView title_img;
     private AuthorShotRecycleAdapter adapter;
-
+    private FloatingActionButton fa_btn;
+    private AlertDialog tipsDialog;
 
     @Override
     protected void onChildCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +64,8 @@ public class AuthorShotsActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list=new ArrayList<>();
 
+        fa_btn= (FloatingActionButton) findViewById(R.id.fab);
+        fa_btn.setOnClickListener(this);
 
 
         title_img= (ImageView) findViewById(R.id.toolbar_image);
@@ -145,5 +155,34 @@ public class AuthorShotsActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id=v.getId();
+        if (id==R.id.fab){
+            showTipDialog();
+        }
+    }
+
+    private void showTipDialog() {
+        if (tipsDialog==null)
+        {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+           builder.setTitle("Tips")
+                    .setMessage("would you like to like the picture?")
+                    .setPositiveButton("sure", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(AuthorShotsActivity.this,"sure",Toast.LENGTH_SHORT).show();
+                        }
+                    }).setNegativeButton("cancle",null)
+           .create();
+            tipsDialog=builder.create();
+        }
+        if (!tipsDialog.isShowing()){
+            tipsDialog.show();
+        }
+
     }
 }

@@ -36,6 +36,9 @@ public class ShotsRecycleAdapter extends RecyclerView.Adapter<ShotsRecycleAdapte
 
     @Override
     public void onBindViewHolder(ShotsHolder holder, int position) {
+        holder.tv_visible_counts.setText(list.get(position).getViewsCount()+"");
+        holder.tv_like_counts.setText(list.get(position).getLikesCount()+"");
+        holder.tv_comment_counts.setText(list.get(position).getCommentsCount()+"");
         holder.tv_author.setText(list.get(position).getUser().getUsername());
         holder.tv_shotname.setText(list.get(position).getTitle());
         Picasso.with(context).load(list.get(position).getImages().getNormal()).into(holder.iv_img);
@@ -50,6 +53,7 @@ public class ShotsRecycleAdapter extends RecyclerView.Adapter<ShotsRecycleAdapte
      class ShotsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView iv_img,iv_author_avatar;
         TextView tv_shotname,tv_author;
+         TextView tv_comment_counts,tv_visible_counts,tv_like_counts;
 
         public ShotsHolder(View itemView) {
             super(itemView);
@@ -58,6 +62,10 @@ public class ShotsRecycleAdapter extends RecyclerView.Adapter<ShotsRecycleAdapte
             tv_shotname= (TextView) itemView.findViewById(R.id.tv_imgname);
             tv_author= (TextView) itemView.findViewById(R.id.tv_author);
             itemView.setOnClickListener(this);
+
+            tv_comment_counts= (TextView) itemView.findViewById(R.id.tv_comment_counts);
+            tv_like_counts= (TextView) itemView.findViewById(R.id.tv_like_counts);
+            tv_visible_counts= (TextView) itemView.findViewById(R.id.tv_visibility);
         }
 
          @Override

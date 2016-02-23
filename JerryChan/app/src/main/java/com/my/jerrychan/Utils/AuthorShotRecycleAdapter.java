@@ -94,7 +94,11 @@ public class AuthorShotRecycleAdapter extends RecyclerView.Adapter<AuthorShotRec
            holder.tv_authorname.setText(author.getUser().getUsername());
             holder.tv_author_date.setText(DateUtils.changeToNormal(author.getUpdatedAt()));
             Picasso.with(context).load(author.getUser().getAvatarUrl()).into(holder.iv_author_img);
-            holder.tv_author_description.setText(Html.fromHtml(author.getDescription())+"");
+            if (author.getDescription()==null){
+                holder.tv_author_description.setText("no description about the author");
+            }else {
+                holder.tv_author_description.setText(Html.fromHtml(author.getDescription()));
+            }
         }else {
             int realPostion=getRealPosition(holder);
             holder.tv_comment_author_update.setText(DateUtils.changeToNormal(mDatas.get(realPostion).getUpdatedAt()));

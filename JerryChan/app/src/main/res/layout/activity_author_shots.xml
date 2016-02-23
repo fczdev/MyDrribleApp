@@ -59,7 +59,8 @@
         android:layout_width="50dp"
         app:layout_anchorGravity="bottom|right|end"
         app:backgroundTint="@color/colorPrimary"
-        app:elevation="4dp"
+        app:elevation="6dp"
+        app:pressedTranslationZ="10dp"
         android:src="@drawable/ic_like"
         android:layout_margin="40dp"
         />
