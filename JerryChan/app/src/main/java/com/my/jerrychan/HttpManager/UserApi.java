@@ -2,6 +2,7 @@ package com.my.jerrychan.httpManager;
 
 import com.my.jerrychan.data.Author;
 import com.my.jerrychan.data.Comment;
+import com.my.jerrychan.data.FollowingPersonShot;
 import com.my.jerrychan.data.Shots;
 import com.my.jerrychan.data.User;
 
@@ -95,6 +96,26 @@ public class UserApi extends BaseApi{
     private static CommentImpl comment=getRetrofit().create(CommentImpl.class);
     public static Observable<List<Comment>> getAuthorComment(String id){
         return comment.getAuthorComment(id);
+    }
+
+
+
+
+    //评论获取
+    private interface  FollowingImpl{
+        @Headers({
+                "Content-Type:application/json;charset=utf-8" ,
+                "Server:nginx",
+                "Cache-Control:max-age=0,private,must-revalidate",
+                "Authorization:Bearer 030410453e69f1981606ddfa1be4caeb892a1ddd35457639d51a5e2d26110968"
+        })
+        @GET("user/following/shots")
+        Observable<List<FollowingPersonShot>> getAuthorComment();
+    }
+    public static FollowingImpl following=getRetrofit().create(FollowingImpl.class);
+
+    public static Observable<List<FollowingPersonShot>> getFollowingShots(){
+        return following.getAuthorComment();
     }
 
 }

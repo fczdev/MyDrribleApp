@@ -53,4 +53,7 @@ public class LoadDialog {
             mDialog.dismiss();
         }
     }
+    public boolean isShowing(){
+        return mDialog.isShowing();
+    }
 }
