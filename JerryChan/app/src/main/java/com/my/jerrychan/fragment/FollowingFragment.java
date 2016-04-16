@@ -1,5 +1,6 @@
 package com.my.jerrychan.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.my.jerrychan.R;
+import com.my.jerrychan.activity.AuthorShotsActivity;
 import com.my.jerrychan.data.FollowingPersonShot;
 import com.my.jerrychan.httpManager.UserApi;
 import com.my.jerrychan.utils.FollowingAdapter;
@@ -79,10 +81,14 @@ public class FollowingFragment extends BaseFragment {
         followingAdapter.setOnRecylceItemClick(new FollowingAdapter.RecycleItemClickListsener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), AuthorShotsActivity.class);
+                intent.putExtra("shotsId",shotses.get(position).getId());
+                intent.putExtra("authorTitle",shotses.get(position).getTitle());
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(followingAdapter);
         getDataCallBack.getDataIsOk();
+
     }
 }

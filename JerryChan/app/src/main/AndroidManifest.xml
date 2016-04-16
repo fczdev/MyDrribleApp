@@ -28,6 +28,10 @@
             android:name=".activity.AuthorShotsActivity"
             android:label="@string/title_activity_author_shots"
             android:theme="@style/AuthorShotsActTheme"></activity>
+        <activity android:name=".activity.PersonInfoActivity"
+            android:theme="@style/ImageTranslucentTheme">
+
+        </activity>
     </application>
 
 </manifest>
